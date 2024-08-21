@@ -1,12 +1,12 @@
-# Flask Law Management API
+# Flask RULES API
 
-A simple Flask application for managing county laws with CRUD operations. This project uses Flask, Flask-SQLAlchemy, and Flask-Marshmallow for API creation and data validation.
+A simple Flask application for managing rules with CRUD operations. This project uses Flask, Flask-SQLAlchemy, and Flask-Marshmallow for API creation and data validation.
 
 ## Features
 
-- **Create County Law**: Add a new county law.
-- **Update County Law**: Modify an existing county law.
-- **Read All Laws**: Retrieve a list of all county laws.
+- **Create Rules**: Add a new county law.
+- **Update Rules**: Modify an existing county law.
+- **Read All Rules**: Retrieve a list of all county laws.
 - **Error Handling**: Includes custom error handling for 404 and 500 errors.
 
 ## Requirements
