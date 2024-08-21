@@ -18,6 +18,8 @@ This Flask application provides an API for managing county laws and voting on th
 
 ## Installation
 
+```bash
+
 1. **Clone the Repository**
 
    ```bash
@@ -26,40 +28,34 @@ This Flask application provides an API for managing county laws and voting on th
    
    
 
-Create a Virtual Environment
+2. **Create a Virtual Environment**
 
-```bash
+`bash
    python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate 
 
-Create a Virtual Environment
 
-bash
+3. Install Dependencies
 
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   bash
 
-Install Dependencies
+   pip install -r requirements.txt
 
-bash
+4. Set Up Configuration
 
-pip install -r requirements.txt
+   Copy config.example.py to config.py and update with your own configuration.
 
-Set Up Configuration
+   bash
 
-Copy config.example.py to config.py and update with your own configuration.
+   cp config.example.py config.py
 
-bash
+   Make sure to set SECRET_KEY and JWT_SECRET_KEY in config.py.
 
-cp config.example.py config.py
+5. Create the Database
 
-Make sure to set SECRET_KEY and JWT_SECRET_KEY in config.py.
+   bash
 
-Create the Database
-
-bash
-
-flask shell
->>> from app import db
->>> db.create_all()
+   flask shell
+   >>> from app import db
+   >>> db.create_all()
 
