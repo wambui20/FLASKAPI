@@ -22,40 +22,41 @@ This Flask application provides an API for managing county laws and voting on th
 
 1. **Clone the Repository**
 
-   ```bash
-   git clone https://github.com/yourusername/your-repo.git
-   cd your-repo
+      ```bash
+      git clone https://github.com/yourusername/your-repo.git
+      cd your-repo
    
    
 
 2. **Create a Virtual Environment**
 
-`bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate 
+   `bash
+      python -m venv venv
+      source venv/bin/activate  # On Windows use `venv\Scripts\activate 
 
 
 3. Install Dependencies
 
-   bash
+      bash
 
-   pip install -r requirements.txt
+      pip install -r requirements.txt
 
 4. Set Up Configuration
 
    Copy config.example.py to config.py and update with your own configuration.
 
-   bash
+      bash
 
-   cp config.example.py config.py
+      cp config.example.py config.py
 
    Make sure to set SECRET_KEY and JWT_SECRET_KEY in config.py.
 
+
 5. Create the Database
 
-   bash
+      bash
 
-   flask shell
-   >>> from app import db
-   >>> db.create_all()
+      flask shell
+      >>> from app import db
+      >>> db.create_all()
 
