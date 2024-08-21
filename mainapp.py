@@ -16,19 +16,19 @@ logger = logging.getLogger(__name__)
 
 
 # Define the schemas for validation
-class LawSchema(Schema):
+class RuleSchema(Schema):
     title = fields.Str(required=True, validate=validate.Length(min=1))
     description = fields.Str(required=True, validate=validate.Length(min=1))
     content = fields.Str(required=True, validate=validate.Length(min=1))
 
 
 # Define the models
-class Law(db.Model):
+class Rule(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(200), nullable=False)
     content = db.Column(db.Text, nullable=False)
-    law_type = db.Column(db.String(50), nullable=False)
+    Rule_type = db.Column(db.String(50), nullable=False)
     status = db.Column(db.String(50), nullable=False)
 
 
@@ -38,60 +38,60 @@ with app.app_context():
     db.create_all()
 
 
-@app.route('/law/county/create', methods=['POST'])
-def create_county_law():
-    schema = LawSchema()
+@app.route('/Rule/county/create', methods=['POST'])
+def create_county_rule():
+    schema = RuleSchema()
     try:
         data = schema.load(request.json)
     except ValidationError as err:
         return jsonify(err.messages), 400
 
-    new_law = Law(title=data['title'], description=data['description'], content=data['content'], law_type='county',
+    new_rule = Rule(title=data['title'], description=data['description'], content=data['content'], rule_type='county',
                   status='pending')
-    db.session.add(new_law)
+    db.session.add(new_rule)
     db.session.commit()
 
-    logger.info(f"Created new county law with ID {new_law.id}")
-    return jsonify({'message': 'County law created successfully!'}), 201
+    logger.info(f"Created new county Rule with ID {new_rule.id}")
+    return jsonify({'message': 'County Rule created successfully!'}), 201
 
 
-@app.route('/law/county/update/<int:law_id>', methods=['PUT'])
-def update_county_law(law_id):
-    schema = LawSchema(partial=True)
+@app.route('/Rule/county/update/<int:rule_id>', methods=['PUT'])
+def update_county_rule(rule_id):
+    schema = RuleSchema(partial=True)
     try:
         data = schema.load(request.json)
     except ValidationError as err:
         return jsonify(err.messages), 400
 
-    law = Law.query.get(law_id)
-    if not law:
-        abort(404, description=f"Law with ID {law_id} not found")
-    law.title = data.get('title', law.title)
-    law.description = data.get('description', law.description)
-    law.content = data.get('content', law.content)
+    rule = Rule.query.get(rule_id)
+    if not rule:
+        abort(404, description=f"Rule with ID {rule_id} not found")
+    rule.title = data.get('title', rule.title)
+    rule.description = data.get('description', Rule.description)
+    rule.content = data.get('content', Rule.content)
     db.session.commit()
 
-    logger.info(f"Updated county law with ID {law_id}")
-    return jsonify({'message': 'County law updated successfully!'}), 200
+    logger.info(f"Updated county Rule with ID {rule_id}")
+    return jsonify({'message': 'County Rule updated successfully!'}), 200
 
 
-@app.route('/law/county/read', methods=['GET'])
-def get_all_laws():
-    laws = Law.query.all()
-    law_list = []
+@app.route('/Rule/county/read', methods=['GET'])
+def get_all_rules():
+    rules = Rule.query.all()
+    rule_list = []
 
-    for law in laws:
-        law_data = {
-            'id': law.id,
-            'title': law.title,
-            'description': law.description,
-            'content': law.content,
-            'law_type': law.law_type,
-            'status': law.status
+    for rule in rules:
+        rule_data = {
+            'id': rule.id,
+            'title': rule.title,
+            'description': rule.description,
+            'content': rule.content,
+            'Rule_type': rule.rule_type,
+            'status': rule.status
         }
-        law_list.append(law_data)
+        rule_list.append(rule_data)
 
-    return jsonify(law_list), 200
+    return jsonify(rule_list), 200
 
 @app.errorhandler(404)
 def not_found(error):
